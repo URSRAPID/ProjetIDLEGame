@@ -25,11 +25,13 @@ public class GameController : MonoBehaviour
     [SerializeField] Button _MilkButtonAmelioration;
     [SerializeField] Button _patisserieButtonAmelioration;
 
-    [SerializeField] Button _cafeButtonVendeur;
-    [SerializeField] Button _theButtonVendeur;
-    [SerializeField] Button _jusButtonVendeur;
-    [SerializeField] Button _MilkButtonVendeur;
-    [SerializeField] Button _patisserieButtonVendeur;
+    
+
+    [SerializeField] VendeursView _vendeursCafe;
+    [SerializeField] VendeursView _vendeursThe;
+    [SerializeField] VendeursView _vendeursJus;
+    [SerializeField] VendeursView _vendeursMilk;
+    [SerializeField] VendeursView _vendeursPatisserie;
 
     /*
     public int autoClicksPerSecond;
@@ -65,15 +67,18 @@ public class GameController : MonoBehaviour
         _patisserieButtonAmelioration.onClick.AddListener(OnClickButtonPatisserie);
 
         // Attachement button pour vendre de cafe
-        _cafeButtonVendeur.onClick.AddListener(OnClickButtonCafeVendeur);
+        _vendeursCafe.AddListener(OnClickButtonCafeVendeur);
         // Attachement button pour vendre de Thé
-        _theButtonVendeur.onClick.AddListener(OnClickButtonTheVendeur);
-        // Attachement button pour vendre de Jus
-        _jusButtonVendeur.onClick.AddListener(OnClickButtonJusVendeur);
-        // Attachement button pour vendre de Milkshake
-        _MilkButtonVendeur.onClick.AddListener(OnClickButtonMilkVendeur);
-        // Attachement button pour vendre de Patisserie
-        _patisserieButtonVendeur.onClick.AddListener(OnClickButtonPatisserieVendeur);
+        _vendeursThe.AddListener(OnClickButtonTheVendeur);
+         // Attachement button pour vendre de Jus
+         _vendeursJus.AddListener(OnClickButtonJusVendeur);
+         // Attachement button pour vendre de Milkshake
+         _vendeursMilk.AddListener(OnClickButtonMilkVendeur);
+         // Attachement button pour vendre de Patisserie
+         _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
+        
+
+        
     }
 
 
