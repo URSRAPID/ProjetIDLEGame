@@ -16,12 +16,9 @@ public class Waypoints : MonoBehaviour
         
         if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
         {
-            
+
             current++;
-            if (current >= waypoints.Length)
-            {
-                current = 0;
-            }
+
         }
         transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
     }

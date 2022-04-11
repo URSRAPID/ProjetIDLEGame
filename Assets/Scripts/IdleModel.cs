@@ -16,11 +16,11 @@ public class IdleModel
 
     public IdleModel()
     {
-        cafeIncome = new FloatObservable(10);
-        theIncome = new FloatObservable(100);
-        jusIncome = new FloatObservable(200);
-        milkIncome = new FloatObservable(300);
-        patisserieIncome = new FloatObservable(400);
+        cafeIncome = new FloatObservable(5);
+        theIncome = new FloatObservable(50);
+        jusIncome = new FloatObservable(100);
+        milkIncome = new FloatObservable(150);
+        patisserieIncome = new FloatObservable(300);
         cafePrixUp = new FloatObservable(10);
         thePrixUp = new FloatObservable(100);
         jusPrixUp = new FloatObservable(200);
@@ -129,7 +129,7 @@ public class IdleModel
     {
         return patisseriePrixUp;
     }
-    internal FloatObservable GetPatisseriIncome()
+    internal FloatObservable GetPatisserieIncome()
     {
         return patisserieIncome;
     }
