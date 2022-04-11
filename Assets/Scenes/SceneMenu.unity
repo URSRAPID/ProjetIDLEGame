@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1120077679141331027, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 56.676
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1120077679141331027, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_LocalScale.x
@@ -254,11 +254,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 23e22edb2be326c49843e8ad29782009, type: 3}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75294125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78823537
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7803922
+      objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_text
-      value: 'Exit
-
-'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_fontSize
@@ -410,11 +428,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc8372212f228554a9aff121b8f208d5, type: 3}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75294125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78823537
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7803922
+      objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_text
-      value: 'Obtions
-
-'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_fontSize
@@ -940,11 +976,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d600baa6a61464c4080da54ae1982247, type: 3}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75294125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.78823537
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7803922
+      objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_text
-      value: 'Credits
-
-'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_fontSize
@@ -1096,9 +1150,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a5d9cc0fefbfcd0499c3f50fbd248993, type: 3}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.89019614
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014416933307868139, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.87843144
+      objectReference: {fileID: 0}
     - target: {fileID: 3949136202734734097, guid: 1ab9a5fab57021d4abdff4362c88923d, type: 3}
       propertyPath: m_text
-      value: 'Play
+      value: '
 
 '
       objectReference: {fileID: 0}

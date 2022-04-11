@@ -1185,6 +1185,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220307665402876162, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 220307665402876163, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1840,6 +1844,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220307665402876162, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 220307665402876163, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2233,6 +2241,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220307665402876162, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 220307665402876163, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -4034,6 +4046,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220307665402876162, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 220307665402876163, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4583,6 +4599,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 220307665402876162, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 220307665402876163, guid: e74ad82ba1d94024a9010028fefd7921, type: 3}
       propertyPath: m_RootOrder
       value: 8
