@@ -10,16 +10,19 @@ public class Waypoints : MonoBehaviour
     float rotSpeed;
     public float speed;
     float WPradius = 1;
+    public bool stop;
 
     void Update()
     {
-        
-        if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
+        if (!stop)
         {
+            if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
+            {
 
-            current++;
+                current++;
 
+            }
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
     }
 }

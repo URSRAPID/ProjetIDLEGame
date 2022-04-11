@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Spawn : MonoBehaviour
 {
     public GameObject _spawn;
+    public GameObject _spawnPrefab;
     Vector2 whereToSpawn;
     public float spawnRate = 2f;
     float nextSpawn = 0f;
@@ -23,12 +24,15 @@ public class Spawn : MonoBehaviour
         if (Time.time > nextSpawn)
         {
             nextSpawn = Time.time + spawnRate;
-            x = 2;
-            y = 2;
-            whereToSpawn = new Vector2(x, y);
-            Instantiate(_spawn, whereToSpawn, Quaternion.identity);
+            whereToSpawn = new Vector2(_spawn.transform.position.x, _spawn.transform.position.y);
+            Instantiate(_spawnPrefab, whereToSpawn, Quaternion.identity);
 
 
         }
+    }
+
+    private void OnMouseDown()
+    {
+        
     }
 }
