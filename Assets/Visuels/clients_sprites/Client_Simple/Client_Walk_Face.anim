@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Client_Walk_face_Anime
+  m_Name: Client_Walk_Face
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 7226750242337081773, guid: 7a0523e8ef5b16844b52bf91bafa01b2, type: 3}
+      value: {fileID: -4710613060964153738, guid: 10760b023458a25408410ed8149ecd4a, type: 3}
+    - time: 0.083333336
+      value: {fileID: -4267467519897926669, guid: 10760b023458a25408410ed8149ecd4a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,13 +42,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 7226750242337081773, guid: 7a0523e8ef5b16844b52bf91bafa01b2, type: 3}
+    - {fileID: -4710613060964153738, guid: 10760b023458a25408410ed8149ecd4a, type: 3}
+    - {fileID: -4267467519897926669, guid: 10760b023458a25408410ed8149ecd4a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.083333336
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Client_Walk_dos_Anime
+  m_Name: Client_Idle_Face
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -361363930796043775, guid: 7a0523e8ef5b16844b52bf91bafa01b2, type: 3}
+      value: {fileID: -8929282835507822823, guid: 10760b023458a25408410ed8149ecd4a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,7 +40,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -361363930796043775, guid: 7a0523e8ef5b16844b52bf91bafa01b2, type: 3}
+    - {fileID: -8929282835507822823, guid: 10760b023458a25408410ed8149ecd4a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
