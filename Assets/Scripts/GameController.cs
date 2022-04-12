@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +6,13 @@ public class GameController : MonoBehaviour
 {
 
     private IdleModel _idleModel;
+
+    private List<Waypoints> cafe;
+    private List<Waypoints> the;
+    private List<Waypoints> jus;
+    private List<Waypoints> milk;
+    private List<Waypoints> patisserie;
+
 
     [SerializeField] private FloatView _moneyView;
     [SerializeField] private FloatView CafeText;
@@ -26,7 +33,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Button _MilkButtonAmelioration;
     [SerializeField] Button _patisserieButtonAmelioration;
 
-    
+
 
     [SerializeField] VendeursView _vendeursCafe;
     [SerializeField] VendeursView _vendeursThe;
@@ -66,103 +73,136 @@ public class GameController : MonoBehaviour
 
         //Attachement button pour amélioration des 5 objects
 
-            //Attachement button pour amélioration de price cafe 
-            _cafeButtonAmelioration.onClick.AddListener(OnClickButtonCafe);
-            //Attachement button pour amélioration de price Thé
-            _theButtonAmelioration.onClick.AddListener(OnClickButtonThe);
-            //Attachement button pour amélioration de price Jus
-            _jusButtonAmelioration.onClick.AddListener(OnClickButtonJus);
-            //Attachement button pour amélioration de price Milkshake
-            _MilkButtonAmelioration.onClick.AddListener(OnClickButtonMilk);
-            //Attachement button pour amélioration de price Patisserie 
-            _patisserieButtonAmelioration.onClick.AddListener(OnClickButtonPatisserie);
+        //Attachement button pour amélioration de price cafe 
+        _cafeButtonAmelioration.onClick.AddListener(OnClickButtonCafe);
+        //Attachement button pour amélioration de price Thé
+        _theButtonAmelioration.onClick.AddListener(OnClickButtonThe);
+        //Attachement button pour amélioration de price Jus
+        _jusButtonAmelioration.onClick.AddListener(OnClickButtonJus);
+        //Attachement button pour amélioration de price Milkshake
+        _MilkButtonAmelioration.onClick.AddListener(OnClickButtonMilk);
+        //Attachement button pour amélioration de price Patisserie 
+        _patisserieButtonAmelioration.onClick.AddListener(OnClickButtonPatisserie);
 
         // Attachement button pour vendre de cafe
         _vendeursCafe.AddListener(OnClickButtonCafeVendeur);
         // Attachement button pour vendre de Thé
         _vendeursThe.AddListener(OnClickButtonTheVendeur);
-         // Attachement button pour vendre de Jus
-         _vendeursJus.AddListener(OnClickButtonJusVendeur);
-         // Attachement button pour vendre de Milkshake
-         _vendeursMilk.AddListener(OnClickButtonMilkVendeur);
-         // Attachement button pour vendre de Patisserie
-         _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
+        // Attachement button pour vendre de Jus
+        _vendeursJus.AddListener(OnClickButtonJusVendeur);
+        // Attachement button pour vendre de Milkshake
+        _vendeursMilk.AddListener(OnClickButtonMilkVendeur);
+        // Attachement button pour vendre de Patisserie
+        _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
 
-        
+
         _cafeWaiting.AddListener(OnClientEnterCafe);
         _theWaiting.AddListener(OnClientEnterThe);
         _jusWaiting.AddListener(OnClientEnterJus);
         _milkWaiting.AddListener(OnClientEnterMilk);
         _patisserieWaiting.AddListener(OnClientEnterPatisserie);
 
+        cafe = new List<Waypoints>();
+        the = new List<Waypoints>();
+        jus = new List<Waypoints>();
+        milk = new List<Waypoints>();
+        patisserie = new List<Waypoints>();
 
     }
 
     private void OnClientEnterThe(Waypoints waypoints)
     {
         waypoints.stop = true;
+        the.Add(waypoints);
+
     }
 
     private void OnClientEnterJus(Waypoints waypoints)
     {
         waypoints.stop = true;
+        jus.Add(waypoints);
     }
 
     private void OnClientEnterMilk(Waypoints waypoints)
     {
         waypoints.stop = true;
+        milk.Add(waypoints);
     }
 
     private void OnClientEnterPatisserie(Waypoints waypoints)
     {
         waypoints.stop = true;
+        patisserie.Add(waypoints);
     }
 
-    
+
     public void OnClientEnterCafe(Waypoints waypoints)
     {
         waypoints.stop = true;
+        cafe.Add(waypoints);
     }
 
-    public void OnClientSorteCafe(Waypoints waypoints)
-    {
-        waypoints.stop = false;
-    }
+
     public void OnClickButtonCafeVendeur()
     {
-        
-        _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
-              
+        if (cafe[0].stop == true)
+        {
+            _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
+            cafe[0].stop = false;
+            cafe.RemoveAt(0);
+        }
+
+
     }
 
     public void OnClickButtonTheVendeur()
     {
-       
-        _idleModel.AddMoney(_idleModel.GetTheIncome().GetValue());
+        if (the[0].stop == true)
+        {
+            _idleModel.AddMoney(_idleModel.GetTheIncome().GetValue());
+            the[0].stop = false;
+            the.RemoveAt(0);
+        }
+
     }
     public void OnClickButtonMilkVendeur()
     {
-        
-        _idleModel.AddMoney(_idleModel.GetMilkIncome().GetValue());
+        if (milk[0].stop == true)
+        {
+            _idleModel.AddMoney(_idleModel.GetMilkIncome().GetValue());
+            milk[0].stop = false;
+            milk.RemoveAt(0);
+        }
+
     }
 
     public void OnClickButtonJusVendeur()
     {
-      
-        _idleModel.AddMoney(_idleModel.GetJusIncome().GetValue());
+        if (jus[0].stop == true)
+        {
+            _idleModel.AddMoney(_idleModel.GetJusIncome().GetValue());
+            jus[0].stop = false;
+            jus.RemoveAt(0);
+        }
+
     }
 
     public void OnClickButtonPatisserieVendeur()
     {
-       
-        _idleModel.AddMoney(_idleModel.GetPatisserieIncome().GetValue());
+        if(patisserie[0].stop == true)
+        {
+            _idleModel.AddMoney(_idleModel.GetPatisserieIncome().GetValue());
+            patisserie[0].stop = false;
+            patisserie.RemoveAt(0);
+        }
+        
     }
     public void OnClickPorte()
     {
         Debug.Log(_idleModel.GetMoney().GetValue());
-            
+
     }
-   
+
     public void OnClickButtonCafe()
     {
         if (_idleModel.GetMoney().GetValue() >= _idleModel.GetCafePrixUp().GetValue())
