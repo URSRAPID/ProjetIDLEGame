@@ -53,8 +53,9 @@ public class IdleModel
     internal void UpgradeMilk()
     {
         AddMoney(-milkPrixUp.GetValue());
-        milkIncome.Add(0.2f * milkIncome.GetValue());
         milkPrixUp.Add(0.2f * milkPrixUp.GetValue());
+        milkIncome.Add(0.2f * milkIncome.GetValue());
+        
     }
     internal void UpgradeJus()
     {

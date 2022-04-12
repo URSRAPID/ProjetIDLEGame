@@ -33,8 +33,6 @@ public class Spawn : MonoBehaviour
             whereToSpawn = new Vector2(_spawn.transform.position.x, _spawn.transform.position.y);
             GameObject client = Instantiate(_spawnPrefab, whereToSpawn, Quaternion.identity);
             client.GetComponent<Waypoints>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
-            
-
         }
     }
 
