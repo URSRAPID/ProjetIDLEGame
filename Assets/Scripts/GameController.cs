@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,13 @@ public class GameController : MonoBehaviour
     [SerializeField] VendeursView _vendeursMilk;
     [SerializeField] VendeursView _vendeursPatisserie;
 
+
+    [SerializeField] Waiting _cafeWaiting;
+    [SerializeField] Waiting _theWaiting;
+    [SerializeField] Waiting _jusWaiting;
+    [SerializeField] Waiting _milkWaiting;
+    [SerializeField] Waiting _patisserieWaiting;
+
     /*
     public int autoClicksPerSecond;
     public int minimumClicksToUnlockUpgrade;
@@ -55,16 +63,19 @@ public class GameController : MonoBehaviour
         _idleModel.GetMilkIncome().Subscribe(MilkTextVendeur);
         _idleModel.GetPatisserieIncome().Subscribe(PatisserieTextVendeur);
 
-        //Attachement button pour amélioration de price cafe 
-        _cafeButtonAmelioration.onClick.AddListener(OnClickButtonCafe);
-        //Attachement button pour amélioration de price Thé
-        _theButtonAmelioration.onClick.AddListener(OnClickButtonThe);
-        //Attachement button pour amélioration de price Jus
-        _jusButtonAmelioration.onClick.AddListener(OnClickButtonJus);
-        //Attachement button pour amélioration de price Milkshake
-        _MilkButtonAmelioration.onClick.AddListener(OnClickButtonMilk);
-        //Attachement button pour amélioration de price Patisserie 
-        _patisserieButtonAmelioration.onClick.AddListener(OnClickButtonPatisserie);
+
+        //Attachement button pour amélioration des 5 objects
+
+            //Attachement button pour amélioration de price cafe 
+            _cafeButtonAmelioration.onClick.AddListener(OnClickButtonCafe);
+            //Attachement button pour amélioration de price Thé
+            _theButtonAmelioration.onClick.AddListener(OnClickButtonThe);
+            //Attachement button pour amélioration de price Jus
+            _jusButtonAmelioration.onClick.AddListener(OnClickButtonJus);
+            //Attachement button pour amélioration de price Milkshake
+            _MilkButtonAmelioration.onClick.AddListener(OnClickButtonMilk);
+            //Attachement button pour amélioration de price Patisserie 
+            _patisserieButtonAmelioration.onClick.AddListener(OnClickButtonPatisserie);
 
         // Attachement button pour vendre de cafe
         _vendeursCafe.AddListener(OnClickButtonCafeVendeur);
@@ -76,27 +87,52 @@ public class GameController : MonoBehaviour
          _vendeursMilk.AddListener(OnClickButtonMilkVendeur);
          // Attachement button pour vendre de Patisserie
          _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
-        
 
         
+        _cafeWaiting.AddListener(OnClientEnterCafe);
+        _theWaiting.AddListener(OnClientEnterThe);
+        _jusWaiting.AddListener(OnClientEnterJus);
+        _milkWaiting.AddListener(OnClientEnterMilk);
+        _patisserieWaiting.AddListener(OnClientEnterPatisserie);
+
+
     }
 
-
-    void Update()
+    private void OnClientEnterThe(Waypoints waypoints)
     {
-        /*
-        if (hasUpgrade)
-        {
-            Money += autoClicksPerSecond * Time.deltaTime;
-            ClicksTotalText.text = Money.ToString("0");
-        }
-        */
+        waypoints.stop = true;
     }
 
+    private void OnClientEnterJus(Waypoints waypoints)
+    {
+        waypoints.stop = true;
+    }
+
+    private void OnClientEnterMilk(Waypoints waypoints)
+    {
+        waypoints.stop = true;
+    }
+
+    private void OnClientEnterPatisserie(Waypoints waypoints)
+    {
+        waypoints.stop = true;
+    }
+
+    
+    public void OnClientEnterCafe(Waypoints waypoints)
+    {
+        waypoints.stop = true;
+    }
+
+    public void OnClientSorteCafe(Waypoints waypoints)
+    {
+        waypoints.stop = false;
+    }
     public void OnClickButtonCafeVendeur()
     {
         
         _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
+              
     }
 
     public void OnClickButtonTheVendeur()
@@ -126,16 +162,7 @@ public class GameController : MonoBehaviour
         Debug.Log(_idleModel.GetMoney().GetValue());
             
     }
-    public void AutoClickUpgrade()
-    {
-        /*
-        if (!hasUpgrade && Money >= minimumClicksToUnlockUpgrade)
-        {
-
-            hasUpgrade = true;
-        }
-        */
-    }
+   
     public void OnClickButtonCafe()
     {
         if (_idleModel.GetMoney().GetValue() >= _idleModel.GetCafePrixUp().GetValue())

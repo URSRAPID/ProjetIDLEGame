@@ -4,37 +4,54 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-    public List <GameObject> _waypointsList1;
-    public List<GameObject> _waypointsList2;
-    public List<GameObject> _waypointsList3;
-    public List<GameObject> _waypointsList4;
-    public List<GameObject> _waypointsList5;
-
-    public GameObject[] waypoints;
+    
+    private List<GameObject> _waypointsLists;
     int current = 0;
-    float rotSpeed;
     public float speed;
     float WPradius = 1;
     public bool stop;
+    int randomlist;
 
-    
 
-    private void Start()
+    public void UpdateMove()
     {
         
-
-    }
-    void Update()
-    {
         if (!stop)
         {
-            if (Vector3.Distance(_waypointsList1[current].transform.position, transform.position) < WPradius)
+            transform.position = Vector3.MoveTowards(transform.position, _waypointsLists[randomlist].transform.GetChild(current).transform.position, Time.deltaTime * speed);
+
+            if (Vector3.Distance(_waypointsLists[randomlist].transform.GetChild(current).transform.position, transform.position) < WPradius)
             {
 
                 current++;
+                if (current >= _waypointsLists[randomlist].transform.childCount)
+                {
+                    stop = true;
+                }
 
             }
-            transform.position = Vector3.MoveTowards(transform.position, _waypointsList1[current].transform.position, Time.deltaTime * speed);
+            
         }
+    }
+
+    internal void Init(GameObject wayPointsToCafe, GameObject wayPointsToThe, GameObject wayPointsToJus, GameObject wayPointsToMilk, GameObject wayPointsToPatisserie)
+    {
+        _waypointsLists = new List<GameObject>();
+        _waypointsLists.Add(wayPointsToCafe);
+        _waypointsLists.Add(wayPointsToThe);
+        _waypointsLists.Add(wayPointsToJus);
+        _waypointsLists.Add(wayPointsToMilk);
+        _waypointsLists.Add(wayPointsToPatisserie);
+    }
+
+    private void Start()
+    {
+        Debug.Log(randomlist);
+        randomlist = Random.Range(0, 5);
+    }
+    void Update()
+    {
+        UpdateMove();
+
     }
 }

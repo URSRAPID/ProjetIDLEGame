@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Spawn : MonoBehaviour
 {
+    [SerializeField] private GameObject _wayPointsToCafe;
+    [SerializeField] private GameObject _wayPointsToThe;
+    [SerializeField] private GameObject _wayPointsToJus;
+    [SerializeField] private GameObject _wayPointsToMilk;
+    [SerializeField] private GameObject _wayPointsToPatisserie;
+
     public GameObject _spawn;
     public GameObject _spawnPrefab;
     Vector2 whereToSpawn;
@@ -25,8 +31,9 @@ public class Spawn : MonoBehaviour
         {
             nextSpawn = Time.time + spawnRate;
             whereToSpawn = new Vector2(_spawn.transform.position.x, _spawn.transform.position.y);
-            Instantiate(_spawnPrefab, whereToSpawn, Quaternion.identity);
-
+            GameObject client = Instantiate(_spawnPrefab, whereToSpawn, Quaternion.identity);
+            client.GetComponent<Waypoints>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
+            
 
         }
     }
