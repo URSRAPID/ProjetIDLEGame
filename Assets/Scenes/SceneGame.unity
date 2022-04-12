@@ -4265,6 +4265,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a2f0535b79b3e4391c072f79b4a870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waypointsList1:
+  - {fileID: 331769019}
+  - {fileID: 1093871019}
+  - {fileID: 1087990496}
+  - {fileID: 2066097085}
+  - {fileID: 272427702}
+  - {fileID: 2066097085}
+  - {fileID: 1087990496}
+  - {fileID: 643139560}
+  - {fileID: 1949452235}
+  - {fileID: 176005454}
+  - {fileID: 2030591689}
+  - {fileID: 281787013}
+  _waypointsList2:
+  - {fileID: 331769019}
+  - {fileID: 1093871019}
+  - {fileID: 1087990496}
+  - {fileID: 643139560}
+  - {fileID: 1307819579}
+  - {fileID: 371568405}
+  - {fileID: 1307819579}
+  - {fileID: 643139560}
+  - {fileID: 1949452235}
+  - {fileID: 176005454}
+  - {fileID: 2030591689}
+  - {fileID: 281787013}
+  _waypointsList3:
+  - {fileID: 331769019}
+  - {fileID: 1093871019}
+  - {fileID: 1087990496}
+  - {fileID: 643139560}
+  - {fileID: 1949452235}
+  - {fileID: 911466590}
+  - {fileID: 503919079}
+  - {fileID: 911466590}
+  - {fileID: 1949452235}
+  - {fileID: 176005454}
+  - {fileID: 2030591689}
+  - {fileID: 281787013}
+  _waypointsList4:
+  - {fileID: 331769019}
+  - {fileID: 1093871019}
+  - {fileID: 1087990496}
+  - {fileID: 643139560}
+  - {fileID: 1949452235}
+  - {fileID: 176005454}
+  - {fileID: 1479930524}
+  - {fileID: 2137754940}
+  - {fileID: 1479930524}
+  - {fileID: 176005454}
+  - {fileID: 2030591689}
+  - {fileID: 281787013}
+  _waypointsList5:
+  - {fileID: 331769019}
+  - {fileID: 1093871019}
+  - {fileID: 1087990496}
+  - {fileID: 643139560}
+  - {fileID: 1949452235}
+  - {fileID: 176005454}
+  - {fileID: 2030591689}
+  - {fileID: 508167421}
+  - {fileID: 972518449}
+  - {fileID: 508167421}
+  - {fileID: 2030591689}
+  - {fileID: 281787013}
   waypoints:
   - {fileID: 331769019}
   - {fileID: 1093871019}
