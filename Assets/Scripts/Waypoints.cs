@@ -46,7 +46,6 @@ public class Waypoints : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(randomlist);
         randomlist = Random.Range(0, 5);
     }
     void Update()

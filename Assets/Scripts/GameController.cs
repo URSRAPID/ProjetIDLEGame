@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,16 @@ public class GameController : MonoBehaviour
 {
 
     private IdleModel _idleModel;
+
+    [SerializeField] private GameObject _wayPointsToCafe;
+    [SerializeField] private GameObject _wayPointsToThe;
+    [SerializeField] private GameObject _wayPointsToJus;
+    [SerializeField] private GameObject _wayPointsToMilk;
+    [SerializeField] private GameObject _wayPointsToPatisserie;
+
+    [SerializeField] VendeursView _spawnPointClient;
+    [SerializeField] public GameObject _spawnPrefab;
+
 
     private List<Waypoints> cafe;
     private List<Waypoints> the;
@@ -95,6 +106,8 @@ public class GameController : MonoBehaviour
         // Attachement button pour vendre de Patisserie
         _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
 
+        _spawnPointClient.AddListener(OnClikSpawnClient);
+
 
         _cafeWaiting.AddListener(OnClientEnterCafe);
         _theWaiting.AddListener(OnClientEnterThe);
@@ -108,6 +121,14 @@ public class GameController : MonoBehaviour
         milk = new List<Waypoints>();
         patisserie = new List<Waypoints>();
 
+    }
+
+    private void OnClikSpawnClient()
+    {
+        Vector2 whereToSpawn;
+        whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
+        GameObject client = Instantiate(_spawnPrefab, whereToSpawn, Quaternion.identity);
+        client.GetComponent<Waypoints>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
     }
 
     private void OnClientEnterThe(Waypoints waypoints)
