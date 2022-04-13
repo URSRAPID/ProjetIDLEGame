@@ -11,5 +11,9 @@ public class Destroy : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+        if (collision.transform.CompareTag("ClientSpecial"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

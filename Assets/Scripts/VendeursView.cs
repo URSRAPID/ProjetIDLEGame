@@ -7,11 +7,7 @@ using UnityEngine.Events;
 public class VendeursView : MonoBehaviour
 {
 
-
-
     UnityEvent _eventOnClic;
-
-
 
     public void AddListener(UnityAction method)
     {

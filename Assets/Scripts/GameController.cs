@@ -13,16 +13,25 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject _wayPointsToJus;
     [SerializeField] private GameObject _wayPointsToMilk;
     [SerializeField] private GameObject _wayPointsToPatisserie;
+    [SerializeField] private GameObject _wayPointsClientSpecial;
 
     [SerializeField] VendeursView _spawnPointClient;
-    [SerializeField] public GameObject _spawnPrefab;
+    [SerializeField] public GameObject _spawnPrefabClient;
+    [SerializeField] public GameObject _spawnPrefabClientSpecial;
 
+   
 
-    private List<Waypoints> cafe;
-    private List<Waypoints> the;
-    private List<Waypoints> jus;
-    private List<Waypoints> milk;
-    private List<Waypoints> patisserie;
+    private List<ClientMove> cafe;
+    private List<ClientMove> the;
+    private List<ClientMove> jus;
+    private List<ClientMove> milk;
+    private List<ClientMove> patisserie;
+
+    private List<ClientSpecialMove> cafeSpecial;
+    private List<ClientSpecialMove> theSpecial;
+    private List<ClientSpecialMove> jusSpecial;
+    private List<ClientSpecialMove> milkSpecial;
+    private List<ClientSpecialMove> patisserieSpecial;
 
 
     [SerializeField] private FloatView _moneyView;
@@ -32,19 +41,19 @@ public class GameController : MonoBehaviour
     [SerializeField] private FloatView MilkshakeText;
     [SerializeField] private FloatView PatisserieText;
 
-    [SerializeField] private FloatView CafeTextVendeur;
-    [SerializeField] private FloatView TheTextVendeur;
-    [SerializeField] private FloatView JusTextVendeur;
-    [SerializeField] private FloatView MilkTextVendeur;
-    [SerializeField] private FloatView PatisserieTextVendeur;
-
-    [SerializeField] Button _cafeButtonAmelioration;
-    [SerializeField] Button _theButtonAmelioration;
-    [SerializeField] Button _jusButtonAmelioration;
-    [SerializeField] Button _MilkButtonAmelioration;
-    [SerializeField] Button _patisserieButtonAmelioration;
 
 
+    [SerializeField] Button _cafeButtonObject;
+    [SerializeField] Button _theButtonObject;
+    [SerializeField] Button _jusButtonObject;
+    [SerializeField] Button _MilkButtonObject;
+    [SerializeField] Button _patisserieButtonObject;
+
+    [SerializeField] Button _vitesseClientsButtonAmeloriation;
+    [SerializeField] Button _pubButtonAmeloriation;
+    [SerializeField] Button _chanceTipsButtonAmeloriation;
+    [SerializeField] Button _prixDeBaseButtonAmeloriation;
+    [SerializeField] Button _venteParClicButtonAmeloriation;
 
     [SerializeField] VendeursView _vendeursCafe;
     [SerializeField] VendeursView _vendeursThe;
@@ -58,6 +67,12 @@ public class GameController : MonoBehaviour
     [SerializeField] Waiting _jusWaiting;
     [SerializeField] Waiting _milkWaiting;
     [SerializeField] Waiting _patisserieWaiting;
+
+    [SerializeField] Waiting _cafeSpecialClientWaiting;
+    [SerializeField] Waiting _theSpecialClientWaiting;
+    [SerializeField] Waiting _jusSpecialClientWaiting;
+    [SerializeField] Waiting _milkSpecialClientWaiting;
+    [SerializeField] Waiting _patisserieSpecialClientWaiting;
 
     /*
     public int autoClicksPerSecond;
@@ -74,26 +89,23 @@ public class GameController : MonoBehaviour
         _idleModel.GetMilkPrixUp().Subscribe(MilkshakeText);
         _idleModel.GetPatisseriePrixUp().Subscribe(PatisserieText);
 
+        _vitesseClientsButtonAmeloriation.onClick.AddListener(OnClickAmeliorationVitesseClients);
+        _pubButtonAmeloriation.onClick.AddListener(OnClikSpawnClientSpecial);
+        _chanceTipsButtonAmeloriation.onClick.AddListener(OnClickAmeliorationchanceTips);
+        _prixDeBaseButtonAmeloriation.onClick.AddListener(OnClickAmeliorationPrixDeBase);
+        _venteParClicButtonAmeloriation.onClick.AddListener(OnClickAmeliorationVenteParClic);
 
-        _idleModel.GetCafeIncome().Subscribe(CafeTextVendeur);
-        _idleModel.GetTheIncome().Subscribe(TheTextVendeur);
-        _idleModel.GetJusIncome().Subscribe(JusTextVendeur);
-        _idleModel.GetMilkIncome().Subscribe(MilkTextVendeur);
-        _idleModel.GetPatisserieIncome().Subscribe(PatisserieTextVendeur);
-
-
-        //Attachement button pour amélioration des 5 objects
 
         //Attachement button pour amélioration de price cafe 
-        _cafeButtonAmelioration.onClick.AddListener(OnClickButtonCafe);
+        _cafeButtonObject.onClick.AddListener(OnClickButtonCafe);
         //Attachement button pour amélioration de price Thé
-        _theButtonAmelioration.onClick.AddListener(OnClickButtonThe);
+        _theButtonObject.onClick.AddListener(OnClickButtonThe);
         //Attachement button pour amélioration de price Jus
-        _jusButtonAmelioration.onClick.AddListener(OnClickButtonJus);
+        _jusButtonObject.onClick.AddListener(OnClickButtonJus);
         //Attachement button pour amélioration de price Milkshake
-        _MilkButtonAmelioration.onClick.AddListener(OnClickButtonMilk);
+        _MilkButtonObject.onClick.AddListener(OnClickButtonMilk);
         //Attachement button pour amélioration de price Patisserie 
-        _patisserieButtonAmelioration.onClick.AddListener(OnClickButtonPatisserie);
+        _patisserieButtonObject.onClick.AddListener(OnClickButtonPatisserie);
 
         // Attachement button pour vendre de cafe
         _vendeursCafe.AddListener(OnClickButtonCafeVendeur);
@@ -107,92 +119,193 @@ public class GameController : MonoBehaviour
         _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
 
         _spawnPointClient.AddListener(OnClikSpawnClient);
+        
 
 
         _cafeWaiting.AddListener(OnClientEnterCafe);
-        _theWaiting.AddListener(OnClientEnterThe);
-        _jusWaiting.AddListener(OnClientEnterJus);
-        _milkWaiting.AddListener(OnClientEnterMilk);
-        _patisserieWaiting.AddListener(OnClientEnterPatisserie);
+        _theWaiting.AddListener(OnClientEnterThe );
+        _jusWaiting.AddListener(OnClientEnterJus );
+        _milkWaiting.AddListener(OnClientEnterMilk );
+        _patisserieWaiting.AddListener(OnClientEnterPatisserie );
 
-        cafe = new List<Waypoints>();
-        the = new List<Waypoints>();
-        jus = new List<Waypoints>();
-        milk = new List<Waypoints>();
-        patisserie = new List<Waypoints>();
+        _cafeSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreCafe);
+        _theSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreThe);
+        _jusSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreJus);
+        _milkSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreMilk);
+        _patisserieSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntrePatisserie);
 
+        cafe = new List<ClientMove>();
+        the = new List<ClientMove>();
+        jus = new List<ClientMove>();
+        milk = new List<ClientMove>();
+        patisserie = new List<ClientMove>();
+
+        cafeSpecial = new List<ClientSpecialMove>();
+        theSpecial = new List<ClientSpecialMove>();
+        jusSpecial = new List<ClientSpecialMove>();
+        milkSpecial = new List<ClientSpecialMove>();
+        patisserieSpecial = new List<ClientSpecialMove>();
+
+    }
+
+    public void OnClickAmeliorationVenteParClic()
+    {
+        
+    }
+
+    public void OnClickAmeliorationPrixDeBase()
+    {
+        
+    }
+
+    public void OnClickAmeliorationchanceTips()
+    {
+        
+    }
+
+    public void OnClickAmeliorationVitesseClients()
+    {
+      
     }
 
     private void OnClikSpawnClient()
     {
         Vector2 whereToSpawn;
         whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
-        GameObject client = Instantiate(_spawnPrefab, whereToSpawn, Quaternion.identity);
-        client.GetComponent<Waypoints>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
+        GameObject client = Instantiate(_spawnPrefabClient, whereToSpawn, Quaternion.identity);
+        client.GetComponent<ClientMove>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
     }
 
-    private void OnClientEnterThe(Waypoints waypoints)
+    private void OnClikSpawnClientSpecial()
+    {
+        Debug.Log("Merge");
+        float spawnRate = 2f;
+        float nextSpawn = 0.0f;
+        Vector2 whereToSpawn;
+
+        if (Time.time > nextSpawn)
+        {
+            nextSpawn = Time.time * spawnRate;
+            whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
+            GameObject clientSpecial = Instantiate(_spawnPrefabClientSpecial, whereToSpawn, Quaternion.identity);
+            clientSpecial.GetComponent<ClientSpecialMove>().Init(_wayPointsClientSpecial);
+        }
+       
+    }
+    
+
+    private void OnClientEnterThe(ClientMove waypoints)
     {
         waypoints.stop = true;
         the.Add(waypoints);
+        
 
     }
+    private void OnClientSpecialEntreThe(ClientSpecialMove waypointsClientSpecial)
+    {
 
-    private void OnClientEnterJus(Waypoints waypoints)
+        waypointsClientSpecial.stop = true;
+        theSpecial.Add(waypointsClientSpecial);
+    }
+
+    private void OnClientEnterJus(ClientMove waypoints)
     {
         waypoints.stop = true;
         jus.Add(waypoints);
     }
+    private void OnClientSpecialEntreJus(ClientSpecialMove waypointsClientSpecial)
+    {
+        waypointsClientSpecial.stop = true;
+        jusSpecial.Add(waypointsClientSpecial);
+    }
 
-    private void OnClientEnterMilk(Waypoints waypoints)
+    private void OnClientEnterMilk(ClientMove waypoints)
     {
         waypoints.stop = true;
         milk.Add(waypoints);
     }
 
-    private void OnClientEnterPatisserie(Waypoints waypoints)
+    private void OnClientSpecialEntreMilk(ClientSpecialMove waypointsClientSpecial)
+    {
+        waypointsClientSpecial.stop = true;
+        milkSpecial.Add(waypointsClientSpecial);
+    }
+
+    private void OnClientEnterPatisserie(ClientMove waypoints)
     {
         waypoints.stop = true;
         patisserie.Add(waypoints);
     }
 
+    private void OnClientSpecialEntrePatisserie(ClientSpecialMove waypointsClientSpecial)
+    {
+        waypointsClientSpecial.stop = true;
+        patisserieSpecial.Add(waypointsClientSpecial);
+    }
 
-    public void OnClientEnterCafe(Waypoints waypoints)
+
+    public void OnClientEnterCafe(ClientMove waypoints)
     {
         waypoints.stop = true;
         cafe.Add(waypoints);
+    }
+    private void OnClientSpecialEntreCafe(ClientSpecialMove waypointsClientSpecial)
+    {
+        waypointsClientSpecial.stop = true;
+        cafeSpecial.Add(waypointsClientSpecial);
     }
 
 
     public void OnClickButtonCafeVendeur()
     {
-        if (cafe[0].stop == true)
+        if(cafeSpecial[0].stop == true  )
         {
             _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
+            cafeSpecial[0].stop = false;
+            cafeSpecial.RemoveAt(0);
+        }
+        else if (cafe[0].stop == true)
+        {
             cafe[0].stop = false;
             cafe.RemoveAt(0);
         }
+        
+        
+      
+       
 
 
     }
 
     public void OnClickButtonTheVendeur()
     {
-        if (the[0].stop == true)
+        if (the[0].stop == true  )
         {
             _idleModel.AddMoney(_idleModel.GetTheIncome().GetValue());
             the[0].stop = false;
             the.RemoveAt(0);
+           
+        }
+        else if(theSpecial[0].stop == true)
+        {
+            theSpecial[0].stop = false;
+            theSpecial.RemoveAt(0);
         }
 
     }
     public void OnClickButtonMilkVendeur()
     {
-        if (milk[0].stop == true)
+        if (milk[0].stop == true  )
         {
             _idleModel.AddMoney(_idleModel.GetMilkIncome().GetValue());
             milk[0].stop = false;
             milk.RemoveAt(0);
+           
+        }
+        if (milkSpecial[0].stop == true)
+        {
+            milkSpecial[0].stop = false;
+            milkSpecial.RemoveAt(0);
         }
 
     }
@@ -204,19 +317,32 @@ public class GameController : MonoBehaviour
             _idleModel.AddMoney(_idleModel.GetJusIncome().GetValue());
             jus[0].stop = false;
             jus.RemoveAt(0);
+            
+        }
+        if (jusSpecial[0].stop == true)
+        {
+            jusSpecial[0].stop = false;
+            jusSpecial.RemoveAt(0);
         }
 
     }
 
     public void OnClickButtonPatisserieVendeur()
     {
-        if(patisserie[0].stop == true)
+        if (patisserie[0].stop == true  )
         {
             _idleModel.AddMoney(_idleModel.GetPatisserieIncome().GetValue());
             patisserie[0].stop = false;
             patisserie.RemoveAt(0);
+            
         }
-        
+        if (patisserieSpecial[0].stop == true)
+        {
+            patisserieSpecial[0].stop = false;
+            patisserieSpecial.RemoveAt(0);
+
+        }
+
     }
     public void OnClickPorte()
     {
