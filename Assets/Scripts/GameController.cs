@@ -36,6 +36,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private FloatView JusText;
     [SerializeField] private FloatView MilkshakeText;
     [SerializeField] private FloatView PatisserieText;
+    [SerializeField] private FloatView speedButtonAmeliorationText;
+    [SerializeField] private FloatView prixButtonAmeliorationX3Text;
 
 
 
@@ -64,7 +66,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Waiting _milkWaitingTrigger;
     [SerializeField] Waiting _patisserieWaitingTrigger;
 
-    
+
 
     [SerializeField] private ClientSpecialMove _changerSpeedClientSpecial;
 
@@ -77,11 +79,11 @@ public class GameController : MonoBehaviour
     bool OpenTips = false;
     bool OpenPrixDeBaseX3 = false;
     bool OpenVenteParClicX2 = false;
-    float PrixButtonAmeliorationTips = 1000f;
-    float PrixButtonAmeliorationX3 = 100f;
-    
-    float speedPrixUpClients = 10000f;
-    float prixVenteParClic = 20000f;
+
+
+
+
+
 
     /*
     public int autoClicksPerSecond;
@@ -90,7 +92,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        
+
         _idleModel = new IdleModel();
         _idleModel.GetMoney().Subscribe(_moneyView);
         _idleModel.GetCafePrixUp().Subscribe(CafeText);
@@ -98,6 +100,8 @@ public class GameController : MonoBehaviour
         _idleModel.GetJusPrixUp().Subscribe(JusText);
         _idleModel.GetMilkPrixUp().Subscribe(MilkshakeText);
         _idleModel.GetPatisseriePrixUp().Subscribe(PatisserieText);
+        _idleModel.GetSpeedPrixUpClients().Subscribe(speedButtonAmeliorationText);
+        _idleModel.GetPrixButtonAmeliorationX3().Subscribe(prixButtonAmeliorationX3Text);
         _idleModel.GetIsClientSpecial().Subscribe(_spawnClientSpecial);
 
         _vitesseClientsButtonAmeloriation.onClick.AddListener(OnClickAmeliorationVitesseClients);
@@ -131,7 +135,7 @@ public class GameController : MonoBehaviour
 
         _spawnPointClient.AddListener(OnClikSpawnClient);
 
-        
+
 
         _cafeWaitingTrigger.AddListener(OnClientEnterCafe);
         _theWaitingTrigger.AddListener(OnClientEnterThe);
@@ -151,39 +155,43 @@ public class GameController : MonoBehaviour
 
     public void OnClickAmeliorationVenteParClic()
     {
-        if (_idleModel.GetMoney().GetValue() >= prixVenteParClic)
+        if (_idleModel.GetMoney().GetValue() >= _idleModel.GetPrixVenteParClic().GetValue())
         {
             OpenVenteParClicX2 = true;
+
         }
     }
 
     public void OnClickAmeliorationPrixDeBase()
     {
-        if (_idleModel.GetMoney().GetValue() >= PrixButtonAmeliorationX3)
+        if (_idleModel.GetMoney().GetValue() >= _idleModel.GetPrixButtonAmeliorationX3().GetValue())
         {
-            _idleModel.AddMoney(-PrixButtonAmeliorationX3);
+            _idleModel.AddMoney(-_idleModel.GetPrixButtonAmeliorationX3().GetValue());
             OpenPrixDeBaseX3 = true;
             if (OpenPrixDeBaseX3 == true)
             {
                 _idleModel.AddCafeIcome(2 * _idleModel.GetCafeIncome().GetValue());
-                
+
                 _idleModel.AddTheIcome(2 * _idleModel.GetTheIncome().GetValue());
-                
+
                 _idleModel.AddJusIcome(2 * _idleModel.GetJusIncome().GetValue());
-               
+
                 _idleModel.AddMilkIcome(2 * _idleModel.GetMilkIncome().GetValue());
-                
+
                 _idleModel.AddPatisserieIcome(2 * _idleModel.GetPatisserieIncome().GetValue());
-              
+
+                _idleModel.UpgradePrixAmeliorationX3();
+
+
             }
         }
     }
 
     public void OnClickAmeliorationchanceTips()
     {
-        if (_idleModel.GetMoney().GetValue() >= PrixButtonAmeliorationTips)
+        if (_idleModel.GetMoney().GetValue() >= _idleModel.GetPrixButtonAmeliorationTips().GetValue())
         {
-            _idleModel.AddMoney(-PrixButtonAmeliorationTips);
+            _idleModel.AddMoney(-_idleModel.GetPrixButtonAmeliorationTips().GetValue());
             OpenTips = true;
         }
 
@@ -191,11 +199,12 @@ public class GameController : MonoBehaviour
 
     public void OnClickAmeliorationVitesseClients()
     {
-        if (_idleModel.GetMoney().GetValue() >= speedPrixUpClients)
+        if (_idleModel.GetMoney().GetValue() >= _idleModel.GetSpeedPrixUpClients().GetValue())
         {
-            _speedClientStandard += 0.1f * _speedClientStandard;
+            _speedClientStandard += 0.15f * _speedClientStandard;
+            _idleModel.UpgradePrixSpeedClient();
         }
-       
+
     }
 
     private void OnClikSpawnClient()
@@ -203,13 +212,17 @@ public class GameController : MonoBehaviour
         Vector2 whereToSpawn;
         whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
         GameObject client = Instantiate(_spawnPrefabClient, whereToSpawn, Quaternion.identity);
-        client.GetComponent<ClientMoveStandard>().Init(_speedClientStandard,_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
+        client.GetComponent<ClientMoveStandard>().Init(_speedClientStandard, _wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
     }
 
     private void OnClikSpawnClientSpecial()
     {
-        
-      _idleModel.GetIsClientSpecial().SetValue(true);
+        if (_idleModel.GetMoney().GetValue() >= _idleModel.GetPrixClientSpecial().GetValue())
+        {
+            _idleModel.GetIsClientSpecial().SetValue(true);
+            _idleModel.AddMoney(-_idleModel.GetPrixClientSpecial().GetValue());
+        }
+
 
     }
 
@@ -259,11 +272,11 @@ public class GameController : MonoBehaviour
         {
             if (clientsInCafe[0].stop == true)
             {
-                
+
                 _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
                 clientsInCafe[0].stop = false;
                 clientsInCafe.RemoveAt(0);
-               
+
                 if (OpenTips == true)
                 {
                     chanceObtenirTips = Random.Range(0, 3);
@@ -276,7 +289,7 @@ public class GameController : MonoBehaviour
                 if (OpenVenteParClicX2 == true)
                 {
                     chanceDeVenteX2 = Random.Range(0, 6);
-                    if(chanceDeVenteX2 == 6)
+                    if (chanceDeVenteX2 == 6)
                     {
                         _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue() * 2);
                     }
@@ -300,7 +313,7 @@ public class GameController : MonoBehaviour
 
             clientsInthe[0].stop = false;
             clientsInthe.RemoveAt(0);
-           
+
             if (OpenTips == true)
             {
                 Debug.Log(chanceObtenirTips);
@@ -331,7 +344,7 @@ public class GameController : MonoBehaviour
             clientsInmilk[0].stop = false;
             clientsInmilk.RemoveAt(0);
 
-           
+
             if (OpenTips == true)
             {
                 Debug.Log(chanceObtenirTips);
@@ -364,7 +377,7 @@ public class GameController : MonoBehaviour
             clientsInjus[0].stop = false;
             clientsInjus.RemoveAt(0);
 
-           
+
 
             if (OpenTips == true)
             {
@@ -394,7 +407,7 @@ public class GameController : MonoBehaviour
             clientsInpatisserie[0].stop = false;
             clientsInpatisserie.RemoveAt(0);
 
-           
+
 
             if (OpenTips == true)
             {

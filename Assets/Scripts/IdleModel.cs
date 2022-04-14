@@ -15,25 +15,49 @@ public class IdleModel
     private FloatObservable patisserieIncome;
     private FloatObservable money;
     private FloatObservable tips;
+    private FloatObservable prixButtonAmeliorationTips;
+    private FloatObservable prixButtonAmeliorationX3;
+    private FloatObservable speedPrixUpClients;
+    private FloatObservable prixVenteParClic;
+    private FloatObservable prixClientSpecial;
     private BoolObservable isClientSpecial;
 
     public IdleModel()
     {
-        cafeIncome = new FloatObservable(5);
-        theIncome = new FloatObservable(50);
-        jusIncome = new FloatObservable(100);
-        milkIncome = new FloatObservable(150);
-        patisserieIncome = new FloatObservable(300);
-        cafePrixUp = new FloatObservable(10);
-        thePrixUp = new FloatObservable(100);
-        jusPrixUp = new FloatObservable(200);
-        milkPrixUp = new FloatObservable(300);
-        patisseriePrixUp = new FloatObservable(400);
+        cafeIncome = new FloatObservable(1) ;
+        theIncome = new FloatObservable(2);
+        jusIncome = new FloatObservable(3);
+        milkIncome = new FloatObservable(4);
+        patisserieIncome = new FloatObservable(5);
+        cafePrixUp = new FloatObservable(150);
+        thePrixUp = new FloatObservable(300);
+        jusPrixUp = new FloatObservable(450);
+        milkPrixUp = new FloatObservable(600);
+        patisseriePrixUp = new FloatObservable(750);
         money = new FloatObservable(0);
         tips = new FloatObservable(0);
+        prixButtonAmeliorationTips = new FloatObservable(1200);
+        prixButtonAmeliorationX3 = new FloatObservable(500);
+        speedPrixUpClients = new FloatObservable(250);
+        prixVenteParClic = new FloatObservable(1000);
+        prixClientSpecial = new FloatObservable(1500);
         isClientSpecial = new BoolObservable(false);
         
     }
+
+
+
+
+    public void UpgradePrixAmeliorationX3()
+    {
+        prixButtonAmeliorationX3.Add(0.5f * prixButtonAmeliorationX3.GetValue());
+    }
+
+    public void UpgradePrixSpeedClient()
+    {
+        speedPrixUpClients.Add(0.2f * speedPrixUpClients.GetValue());
+    }
+
     public void tipsValue()
     {
         Debug.Log(cafeIncome.GetValue());
@@ -43,36 +67,59 @@ public class IdleModel
     public void UpgradeCafe()
     {
         AddMoney(-cafePrixUp.GetValue());
-        cafePrixUp.Add(0.2f * cafePrixUp.GetValue());
-        cafeIncome.Add(0.2f * cafeIncome.GetValue());
+        cafePrixUp.Add(0.4f * cafePrixUp.GetValue());
+        cafeIncome.Add(0.3f * cafeIncome.GetValue());
     }
     internal void UpgradeThe()
     {
         AddMoney(-thePrixUp.GetValue());
-        thePrixUp.Add(0.2f * thePrixUp.GetValue());
-        theIncome.Add(0.2f * theIncome.GetValue());
+        thePrixUp.Add(0.4f * thePrixUp.GetValue());
+        theIncome.Add(0.25f * theIncome.GetValue());
     }
 
     internal void UpgradePatisserie()
     {
         AddMoney(-patisseriePrixUp.GetValue());
-        patisseriePrixUp.Add(0.2f * patisseriePrixUp.GetValue());
-        patisserieIncome.Add(0.2f * patisserieIncome.GetValue());
+        patisseriePrixUp.Add(0.4f * patisseriePrixUp.GetValue());
+        patisserieIncome.Add(0.1f * patisserieIncome.GetValue());
     }
 
     internal void UpgradeMilk()
     {
         AddMoney(-milkPrixUp.GetValue());
-        milkPrixUp.Add(0.2f * milkPrixUp.GetValue());
-        milkIncome.Add(0.2f * milkIncome.GetValue());
+        milkPrixUp.Add(0.4f * milkPrixUp.GetValue());
+        milkIncome.Add(0.15f * milkIncome.GetValue());
         
     }
     internal void UpgradeJus()
     {
         AddMoney(-jusPrixUp.GetValue());
-        jusPrixUp.Add(0.2f * jusPrixUp.GetValue());
+        jusPrixUp.Add(0.4f * jusPrixUp.GetValue());
         jusIncome.Add(0.2f * jusIncome.GetValue());
 
+    }
+
+
+
+
+
+
+    public void AddPrixVenteParClic(float deltaPrixVenteParClic)
+    {
+        prixVenteParClic.Add(deltaPrixVenteParClic);
+    }
+
+    public void AddSpeedPrixUpClients(float deltaSpeedPrixUpClients)
+    {
+        speedPrixUpClients.Add(deltaSpeedPrixUpClients);
+    }
+    public void AddPrixButtonAmeliorationX3(float deltaPrixButtonAmeliorationX3)
+    {
+        prixButtonAmeliorationX3.Add(deltaPrixButtonAmeliorationX3);
+    }
+    public void AddPrixButtonAmeliorationTips(float deltaPrixAmeliorationTips)
+    {
+        prixButtonAmeliorationTips.Add(deltaPrixAmeliorationTips);
     }
     public void AddCafePrix(float deltaPrixCafe)
     {
@@ -119,6 +166,32 @@ public class IdleModel
         money.Add(deltaMoney);
     }
 
+
+
+
+
+
+    internal FloatObservable GetPrixClientSpecial()
+    {
+        return prixClientSpecial;
+    }
+    internal FloatObservable GetPrixVenteParClic()
+    {
+        return prixVenteParClic;
+    }
+
+    internal FloatObservable GetSpeedPrixUpClients()
+    {
+        return speedPrixUpClients;
+    }
+    internal FloatObservable GetPrixButtonAmeliorationX3()
+    {
+        return prixButtonAmeliorationX3;
+    }
+    internal FloatObservable GetPrixButtonAmeliorationTips()
+    {
+        return prixButtonAmeliorationTips;
+    }
 
     internal BoolObservable GetIsClientSpecial()
     {
