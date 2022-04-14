@@ -10,15 +10,7 @@ public class ClientSpecialMove : ClientMove
     float WPradius = 1;
    
     int randomlist;
-    public float GetSpeedClientSpecial()
-    {
-        return speed;
-    }
-
-    public void AddSpeedClientSpecial(float speedSpecial)
-    {
-        speed = speedSpecial;
-    }
+   
 
 
     public void UpdateMoveClientSpecial()

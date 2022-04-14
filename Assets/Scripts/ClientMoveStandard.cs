@@ -9,18 +9,27 @@ public class ClientMoveStandard : ClientMove
     private List<GameObject> _waypointsLists;
     [SerializeField] Animator _animator;
     int current = 0;
-    public float speed = 3.5f;
+    public float _speed;
     float WPradius = 1;
    
     int randomlist;
 
+    public float GetSpeedClientStandardl()
+    {
+        return _speed;
+    }
+
+    public void AddSpeedClientStandard(float speedSpecial)
+    {
+        _speed += speedSpecial;
+    }
 
     public void UpdateMove()
     {
         
         if (!stop)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _waypointsLists[randomlist].transform.GetChild(current).transform.position, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, _waypointsLists[randomlist].transform.GetChild(current).transform.position, Time.deltaTime * _speed);
 
             if (Vector3.Distance(_waypointsLists[randomlist].transform.GetChild(current).transform.position, transform.position) < WPradius)
             {
@@ -36,7 +45,7 @@ public class ClientMoveStandard : ClientMove
         }
     }
 
-    internal void Init(GameObject wayPointsToCafe, GameObject wayPointsToThe, GameObject wayPointsToJus, GameObject wayPointsToMilk, GameObject wayPointsToPatisserie)
+    internal void Init(float speed , GameObject wayPointsToCafe, GameObject wayPointsToThe, GameObject wayPointsToJus, GameObject wayPointsToMilk, GameObject wayPointsToPatisserie)
     {
         _waypointsLists = new List<GameObject>();
         _waypointsLists.Add(wayPointsToCafe);
@@ -44,6 +53,7 @@ public class ClientMoveStandard : ClientMove
         _waypointsLists.Add(wayPointsToJus);
         _waypointsLists.Add(wayPointsToMilk);
         _waypointsLists.Add(wayPointsToPatisserie);
+        _speed = speed;
     }
 
     private void Start()

@@ -78,6 +78,7 @@ public class GameController : MonoBehaviour
     bool OpenPrixDeBaseX3 = false;
     float PrixButtonAmeliorationTips = 1000f;
     float PrixButtonAmeliorationX3 = 100f;
+    [SerializeField] float _speedClientStandard;
 
     /*
     public int autoClicksPerSecond;
@@ -141,12 +142,6 @@ public class GameController : MonoBehaviour
         clientsInmilk = new List<ClientMove>();
         clientsInpatisserie = new List<ClientMove>();
 
-
-
-        _changerSpeedClientSpecial = new ClientSpecialMove();
-
-
-
     }
 
     public void OnClickAmeliorationVenteParClic()
@@ -175,9 +170,10 @@ public class GameController : MonoBehaviour
 
     public void OnClickAmeliorationVitesseClients()
     {
-        Debug.Log(_changerSpeedClientSpecial.GetSpeedClientSpecial());
-        _changerSpeedClientSpecial.AddSpeedClientSpecial(100f);
-        Debug.Log(_changerSpeedClientSpecial.GetSpeedClientSpecial());
+
+        _speedClientStandard += 0.1f * _speedClientStandard;
+
+       
     }
 
     private void OnClikSpawnClient()
@@ -185,7 +181,7 @@ public class GameController : MonoBehaviour
         Vector2 whereToSpawn;
         whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
         GameObject client = Instantiate(_spawnPrefabClient, whereToSpawn, Quaternion.identity);
-        client.GetComponent<ClientMoveStandard>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
+        client.GetComponent<ClientMoveStandard>().Init(_speedClientStandard,_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
     }
 
     private void OnClikSpawnClientSpecial()

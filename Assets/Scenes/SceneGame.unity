@@ -4439,6 +4439,7 @@ MonoBehaviour:
   _milkSpecialClientWaiting: {fileID: 0}
   _patisserieSpecialClientWaiting: {fileID: 0}
   _changerSpeedClientSpecial: {fileID: 3209289454066434294, guid: d4b0f6dd34317b8499d3a50b6c8fb35f, type: 3}
+  _speedClientStandard: 3.5
 --- !u!4 &1027012683
 Transform:
   m_ObjectHideFlags: 0
@@ -5198,7 +5199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1375035786
 MonoBehaviour:
   m_ObjectHideFlags: 0
