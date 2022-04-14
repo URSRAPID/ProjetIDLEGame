@@ -3,7 +3,48 @@ guid: 0258e3b90d6ce834aa124b0e61d12ce7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _wayPointsToCafe: {instanceID: 0}
+  - _wayPointsToThe: {instanceID: 0}
+  - _wayPointsToJus: {instanceID: 0}
+  - _wayPointsToMilk: {instanceID: 0}
+  - _wayPointsToPatisserie: {instanceID: 0}
+  - _wayPointsClientSpecial: {instanceID: 0}
+  - _spawnPointClient: {instanceID: 0}
+  - _spawnPrefabClient: {instanceID: 0}
+  - _spawnPrefabClientSpecial: {instanceID: 0}
+  - _moneyView: {instanceID: 0}
+  - CafeText: {instanceID: 0}
+  - TheText: {instanceID: 0}
+  - JusText: {instanceID: 0}
+  - MilkshakeText: {instanceID: 0}
+  - PatisserieText: {instanceID: 0}
+  - _cafeButtonObject: {instanceID: 0}
+  - _theButtonObject: {instanceID: 0}
+  - _jusButtonObject: {instanceID: 0}
+  - _MilkButtonObject: {instanceID: 0}
+  - _patisserieButtonObject: {instanceID: 0}
+  - _vitesseClientsButtonAmeloriation: {instanceID: 0}
+  - _pubButtonAmeloriation: {instanceID: 0}
+  - _chanceTipsButtonAmeloriation: {instanceID: 0}
+  - _prixDeBaseButtonAmeloriation: {instanceID: 0}
+  - _venteParClicButtonAmeloriation: {instanceID: 0}
+  - _vendeursCafe: {instanceID: 0}
+  - _vendeursThe: {instanceID: 0}
+  - _vendeursJus: {instanceID: 0}
+  - _vendeursMilk: {instanceID: 0}
+  - _vendeursPatisserie: {instanceID: 0}
+  - _cafeWaiting: {instanceID: 0}
+  - _theWaiting: {instanceID: 0}
+  - _jusWaiting: {instanceID: 0}
+  - _milkWaiting: {instanceID: 0}
+  - _patisserieWaiting: {instanceID: 0}
+  - _cafeSpecialClientWaiting: {instanceID: 0}
+  - _theSpecialClientWaiting: {instanceID: 0}
+  - _jusSpecialClientWaiting: {instanceID: 0}
+  - _milkSpecialClientWaiting: {instanceID: 0}
+  - _patisserieSpecialClientWaiting: {instanceID: 0}
+  - _changerSpeedClientSpecial: {fileID: 3209289454066434294, guid: d4b0f6dd34317b8499d3a50b6c8fb35f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

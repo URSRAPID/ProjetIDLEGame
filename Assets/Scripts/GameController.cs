@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
@@ -19,19 +19,15 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject _spawnPrefabClient;
     [SerializeField] public GameObject _spawnPrefabClientSpecial;
 
-   
 
-    private List<ClientMove> cafe;
-    private List<ClientMove> the;
-    private List<ClientMove> jus;
-    private List<ClientMove> milk;
-    private List<ClientMove> patisserie;
 
-    private List<ClientSpecialMove> cafeSpecial;
-    private List<ClientSpecialMove> theSpecial;
-    private List<ClientSpecialMove> jusSpecial;
-    private List<ClientSpecialMove> milkSpecial;
-    private List<ClientSpecialMove> patisserieSpecial;
+    private List<ClientMove> clientsInCafe;
+    private List<ClientMove> clientsInthe;
+    private List<ClientMove> clientsInjus;
+    private List<ClientMove> clientsInmilk;
+    private List<ClientMove> clientsInpatisserie;
+
+
 
 
     [SerializeField] private FloatView _moneyView;
@@ -62,17 +58,26 @@ public class GameController : MonoBehaviour
     [SerializeField] VendeursView _vendeursPatisserie;
 
 
-    [SerializeField] Waiting _cafeWaiting;
-    [SerializeField] Waiting _theWaiting;
-    [SerializeField] Waiting _jusWaiting;
-    [SerializeField] Waiting _milkWaiting;
-    [SerializeField] Waiting _patisserieWaiting;
+    [SerializeField] Waiting _cafeWaitingTrigger;
+    [SerializeField] Waiting _theWaitingTrigger;
+    [SerializeField] Waiting _jusWaitingTrigger;
+    [SerializeField] Waiting _milkWaitingTrigger;
+    [SerializeField] Waiting _patisserieWaitingTrigger;
 
-    [SerializeField] Waiting _cafeSpecialClientWaiting;
-    [SerializeField] Waiting _theSpecialClientWaiting;
-    [SerializeField] Waiting _jusSpecialClientWaiting;
-    [SerializeField] Waiting _milkSpecialClientWaiting;
-    [SerializeField] Waiting _patisserieSpecialClientWaiting;
+    [SerializeField] StopClientSpecial _cafeSpecialClientWaiting;
+    [SerializeField] StopClientSpecial _theSpecialClientWaiting;
+    [SerializeField] StopClientSpecial _jusSpecialClientWaiting;
+    [SerializeField] StopClientSpecial _milkSpecialClientWaiting;
+    [SerializeField] StopClientSpecial _patisserieSpecialClientWaiting;
+
+    [SerializeField] private ClientSpecialMove _changerSpeedClientSpecial;
+
+
+    int chanceObtenirTips;
+    bool OpenTips = false;
+    bool OpenPrixDeBaseX3 = false;
+    float PrixButtonAmeliorationTips = 1000f;
+    float PrixButtonAmeliorationX3 = 100f;
 
     /*
     public int autoClicksPerSecond;
@@ -96,15 +101,15 @@ public class GameController : MonoBehaviour
         _venteParClicButtonAmeloriation.onClick.AddListener(OnClickAmeliorationVenteParClic);
 
 
-        //Attachement button pour amélioration de price cafe 
+        //Attachement button pour Up de price cafe 
         _cafeButtonObject.onClick.AddListener(OnClickButtonCafe);
-        //Attachement button pour amélioration de price Thé
+        //Attachement button pour Up de price Thé
         _theButtonObject.onClick.AddListener(OnClickButtonThe);
-        //Attachement button pour amélioration de price Jus
+        //Attachement button pour Up de price Jus
         _jusButtonObject.onClick.AddListener(OnClickButtonJus);
-        //Attachement button pour amélioration de price Milkshake
+        //Attachement button pour Up de price Milkshake
         _MilkButtonObject.onClick.AddListener(OnClickButtonMilk);
-        //Attachement button pour amélioration de price Patisserie 
+        //Attachement button pour Up de price Patisserie 
         _patisserieButtonObject.onClick.AddListener(OnClickButtonPatisserie);
 
         // Attachement button pour vendre de cafe
@@ -119,53 +124,60 @@ public class GameController : MonoBehaviour
         _vendeursPatisserie.AddListener(OnClickButtonPatisserieVendeur);
 
         _spawnPointClient.AddListener(OnClikSpawnClient);
-        
 
 
-        _cafeWaiting.AddListener(OnClientEnterCafe);
-        _theWaiting.AddListener(OnClientEnterThe );
-        _jusWaiting.AddListener(OnClientEnterJus );
-        _milkWaiting.AddListener(OnClientEnterMilk );
-        _patisserieWaiting.AddListener(OnClientEnterPatisserie );
 
-        _cafeSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreCafe);
-        _theSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreThe);
-        _jusSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreJus);
-        _milkSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntreMilk);
-        _patisserieSpecialClientWaiting.AddListenerClientSpecial(OnClientSpecialEntrePatisserie);
+        _cafeWaitingTrigger.AddListener(OnClientEnterCafe);
+        _theWaitingTrigger.AddListener(OnClientEnterThe);
+        _jusWaitingTrigger.AddListener(OnClientEnterJus);
+        _milkWaitingTrigger.AddListener(OnClientEnterMilk);
+        _patisserieWaitingTrigger.AddListener(OnClientEnterPatisserie);
 
-        cafe = new List<ClientMove>();
-        the = new List<ClientMove>();
-        jus = new List<ClientMove>();
-        milk = new List<ClientMove>();
-        patisserie = new List<ClientMove>();
 
-        cafeSpecial = new List<ClientSpecialMove>();
-        theSpecial = new List<ClientSpecialMove>();
-        jusSpecial = new List<ClientSpecialMove>();
-        milkSpecial = new List<ClientSpecialMove>();
-        patisserieSpecial = new List<ClientSpecialMove>();
+
+        clientsInCafe = new List<ClientMove>();
+        clientsInthe = new List<ClientMove>();
+        clientsInjus = new List<ClientMove>();
+        clientsInmilk = new List<ClientMove>();
+        clientsInpatisserie = new List<ClientMove>();
+
+
+
+        _changerSpeedClientSpecial = new ClientSpecialMove();
+
+
 
     }
 
     public void OnClickAmeliorationVenteParClic()
     {
-        
+
     }
 
     public void OnClickAmeliorationPrixDeBase()
     {
-        
+        if (_idleModel.GetMoney().GetValue() >= PrixButtonAmeliorationX3)
+        {
+            _idleModel.AddMoney(-PrixButtonAmeliorationX3);
+            OpenPrixDeBaseX3 = true;
+        }
     }
 
     public void OnClickAmeliorationchanceTips()
     {
-        
+        if (_idleModel.GetMoney().GetValue() >= PrixButtonAmeliorationTips)
+        {
+            _idleModel.AddMoney(-PrixButtonAmeliorationTips);
+            OpenTips = true;
+        }
+
     }
 
     public void OnClickAmeliorationVitesseClients()
     {
-      
+        Debug.Log(_changerSpeedClientSpecial.GetSpeedClientSpecial());
+        _changerSpeedClientSpecial.AddSpeedClientSpecial(100f);
+        Debug.Log(_changerSpeedClientSpecial.GetSpeedClientSpecial());
     }
 
     private void OnClikSpawnClient()
@@ -173,12 +185,12 @@ public class GameController : MonoBehaviour
         Vector2 whereToSpawn;
         whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
         GameObject client = Instantiate(_spawnPrefabClient, whereToSpawn, Quaternion.identity);
-        client.GetComponent<ClientMove>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
+        client.GetComponent<ClientMoveStandard>().Init(_wayPointsToCafe, _wayPointsToThe, _wayPointsToJus, _wayPointsToMilk, _wayPointsToPatisserie);
     }
 
     private void OnClikSpawnClientSpecial()
     {
-        Debug.Log("Merge");
+        
         float spawnRate = 2f;
         float nextSpawn = 0.0f;
         Vector2 whereToSpawn;
@@ -190,158 +202,172 @@ public class GameController : MonoBehaviour
             GameObject clientSpecial = Instantiate(_spawnPrefabClientSpecial, whereToSpawn, Quaternion.identity);
             clientSpecial.GetComponent<ClientSpecialMove>().Init(_wayPointsClientSpecial);
         }
-       
-    }
-    
 
-    private void OnClientEnterThe(ClientMove waypoints)
-    {
-        waypoints.stop = true;
-        the.Add(waypoints);
-        
-
-    }
-    private void OnClientSpecialEntreThe(ClientSpecialMove waypointsClientSpecial)
-    {
-
-        waypointsClientSpecial.stop = true;
-        theSpecial.Add(waypointsClientSpecial);
-    }
-
-    private void OnClientEnterJus(ClientMove waypoints)
-    {
-        waypoints.stop = true;
-        jus.Add(waypoints);
-    }
-    private void OnClientSpecialEntreJus(ClientSpecialMove waypointsClientSpecial)
-    {
-        waypointsClientSpecial.stop = true;
-        jusSpecial.Add(waypointsClientSpecial);
-    }
-
-    private void OnClientEnterMilk(ClientMove waypoints)
-    {
-        waypoints.stop = true;
-        milk.Add(waypoints);
-    }
-
-    private void OnClientSpecialEntreMilk(ClientSpecialMove waypointsClientSpecial)
-    {
-        waypointsClientSpecial.stop = true;
-        milkSpecial.Add(waypointsClientSpecial);
-    }
-
-    private void OnClientEnterPatisserie(ClientMove waypoints)
-    {
-        waypoints.stop = true;
-        patisserie.Add(waypoints);
-    }
-
-    private void OnClientSpecialEntrePatisserie(ClientSpecialMove waypointsClientSpecial)
-    {
-        waypointsClientSpecial.stop = true;
-        patisserieSpecial.Add(waypointsClientSpecial);
     }
 
 
-    public void OnClientEnterCafe(ClientMove waypoints)
+    private void OnClientEnterThe(ClientMove client)
     {
-        waypoints.stop = true;
-        cafe.Add(waypoints);
+        client.stop = true;
+        clientsInthe.Add(client);
+
+
     }
-    private void OnClientSpecialEntreCafe(ClientSpecialMove waypointsClientSpecial)
+
+
+    private void OnClientEnterJus(ClientMove client)
     {
-        waypointsClientSpecial.stop = true;
-        cafeSpecial.Add(waypointsClientSpecial);
+        client.stop = true;
+        clientsInjus.Add(client);
     }
+
+
+    private void OnClientEnterMilk(ClientMove client)
+    {
+        client.stop = true;
+        clientsInmilk.Add(client);
+    }
+
+
+    private void OnClientEnterPatisserie(ClientMove client)
+    {
+        client.stop = true;
+        clientsInpatisserie.Add(client);
+    }
+
+
+
+    public void OnClientEnterCafe(ClientMove client)
+    {
+        client.stop = true;
+        clientsInCafe.Add(client);
+    }
+
 
 
     public void OnClickButtonCafeVendeur()
     {
-        if(cafeSpecial[0].stop == true  )
+        if (clientsInCafe.Count > 0)
         {
-            _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
-            cafeSpecial[0].stop = false;
-            cafeSpecial.RemoveAt(0);
+            if (clientsInCafe[0].stop == true)
+            {
+                _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
+                clientsInCafe[0].stop = false;
+                clientsInCafe.RemoveAt(0);
+
+
+
+                if (OpenPrixDeBaseX3 == true)
+                {
+                    Debug.Log(_idleModel.GetCafeIncome().GetValue());
+                    _idleModel.AddCafeIcome(3f * _idleModel.GetCafeIncome().GetValue());
+                }
+                if (OpenTips == true)
+                {
+                    Debug.Log(chanceObtenirTips);
+                    chanceObtenirTips = Random.Range(0, 3);
+                    if (chanceObtenirTips == 2)
+                    {
+                        _idleModel.tipsValue();
+                    }
+                }
+
+
+
+            }
         }
-        else if (cafe[0].stop == true)
-        {
-            cafe[0].stop = false;
-            cafe.RemoveAt(0);
-        }
-        
-        
-      
-       
+
 
 
     }
+
+
 
     public void OnClickButtonTheVendeur()
     {
-        if (the[0].stop == true  )
+        if (clientsInthe[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetTheIncome().GetValue());
-            the[0].stop = false;
-            the.RemoveAt(0);
-           
-        }
-        else if(theSpecial[0].stop == true)
-        {
-            theSpecial[0].stop = false;
-            theSpecial.RemoveAt(0);
-        }
 
+            clientsInthe[0].stop = false;
+            clientsInthe.RemoveAt(0);
+
+            if (OpenTips == true)
+            {
+                Debug.Log(chanceObtenirTips);
+                chanceObtenirTips = Random.Range(0, 3);
+                if (chanceObtenirTips == 2)
+                {
+                    _idleModel.tipsValue();
+                }
+            }
+
+        }
     }
     public void OnClickButtonMilkVendeur()
     {
-        if (milk[0].stop == true  )
+        if (clientsInmilk[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetMilkIncome().GetValue());
-            milk[0].stop = false;
-            milk.RemoveAt(0);
-           
+
+            clientsInmilk[0].stop = false;
+            clientsInmilk.RemoveAt(0);
+
+            if (OpenTips == true)
+            {
+                Debug.Log(chanceObtenirTips);
+                chanceObtenirTips = Random.Range(0, 3);
+                if (chanceObtenirTips == 2)
+                {
+                    _idleModel.tipsValue();
+                }
+            }
+
         }
-        if (milkSpecial[0].stop == true)
-        {
-            milkSpecial[0].stop = false;
-            milkSpecial.RemoveAt(0);
-        }
+
 
     }
 
     public void OnClickButtonJusVendeur()
     {
-        if (jus[0].stop == true)
+        if (clientsInjus[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetJusIncome().GetValue());
-            jus[0].stop = false;
-            jus.RemoveAt(0);
-            
-        }
-        if (jusSpecial[0].stop == true)
-        {
-            jusSpecial[0].stop = false;
-            jusSpecial.RemoveAt(0);
-        }
 
+            clientsInjus[0].stop = false;
+            clientsInjus.RemoveAt(0);
+
+            if (OpenTips == true)
+            {
+                Debug.Log(chanceObtenirTips);
+                chanceObtenirTips = Random.Range(0, 3);
+                if (chanceObtenirTips == 2)
+                {
+                    _idleModel.tipsValue();
+                }
+            }
+        }
     }
 
     public void OnClickButtonPatisserieVendeur()
     {
-        if (patisserie[0].stop == true  )
+        if (clientsInpatisserie[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetPatisserieIncome().GetValue());
-            patisserie[0].stop = false;
-            patisserie.RemoveAt(0);
-            
-        }
-        if (patisserieSpecial[0].stop == true)
-        {
-            patisserieSpecial[0].stop = false;
-            patisserieSpecial.RemoveAt(0);
+            clientsInpatisserie[0].stop = false;
+            clientsInpatisserie.RemoveAt(0);
 
+            if (OpenTips == true)
+            {
+                Debug.Log(chanceObtenirTips);
+                chanceObtenirTips = Random.Range(0, 3);
+                if (chanceObtenirTips == 2)
+                {
+                    _idleModel.tipsValue();
+                }
+            }
         }
+
 
     }
     public void OnClickPorte()

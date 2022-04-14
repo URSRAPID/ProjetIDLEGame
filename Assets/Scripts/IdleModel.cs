@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class IdleModel
 {
@@ -13,6 +14,7 @@ public class IdleModel
     private FloatObservable patisseriePrixUp;
     private FloatObservable patisserieIncome;
     private FloatObservable money;
+    private FloatObservable tips;
 
     public IdleModel()
     {
@@ -27,8 +29,15 @@ public class IdleModel
         milkPrixUp = new FloatObservable(300);
         patisseriePrixUp = new FloatObservable(400);
         money = new FloatObservable(0);
+        tips = new FloatObservable(0);
 
-
+        
+    }
+    public void tipsValue()
+    {
+        Debug.Log(cafeIncome.GetValue());
+        tips.Add (cafeIncome.GetValue() /1f);
+        AddMoney(tips.GetValue());
     }
     public void UpgradeCafe()
     {
@@ -68,26 +77,47 @@ public class IdleModel
     {
         cafePrixUp.Add(deltaPrixCafe);
     }
+    public void AddCafeIcome(float deltaPrixCafe)
+    {
+        cafeIncome.Add(deltaPrixCafe);
+    }
     public void AddThePrix(float deltaPrixThe)
     {
         thePrixUp.Add(deltaPrixThe);
+    }
+    public void AddTheIcome(float deltaPrixThe)
+    {
+        theIncome.Add(deltaPrixThe);
     }
     public void AddJusPrix(float deltaPrixJus)
     {
         jusPrixUp.Add(deltaPrixJus);
     }
+    public void AddJusIcome(float deltaPrixJus)
+    {
+        jusIncome.Add(deltaPrixJus);
+    }
     public void AddMilkPrix(float deltaPrixMilk)
     {
         cafePrixUp.Add(deltaPrixMilk);
+    }
+    public void AddMilkIcome(float deltaPrixMilk)
+    {
+        milkIncome.Add(deltaPrixMilk);
     }
     public void AddPatisseriePrix(float deltaPrixPatisserie)
     {
         patisseriePrixUp.Add(deltaPrixPatisserie);
     }
+    public void AddPatisserieIcome(float deltaPrixPatisserie)
+    {
+        patisserieIncome.Add(deltaPrixPatisserie);
+    }
     public void AddMoney(float deltaMoney)
     {
         money.Add(deltaMoney);
     }
+
 
 
     internal FloatObservable GetCafeIncome()

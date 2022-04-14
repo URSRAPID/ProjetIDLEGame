@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public class Waiting : MonoBehaviour
 {
     UnityEvent<ClientMove> _onEnter;
-    UnityEvent<ClientSpecialMove> _onEnterClientSpecial;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,15 +29,8 @@ public class Waiting : MonoBehaviour
         _onEnter.AddListener(method);
        
     }
+ 
 
-    public void AddListenerClientSpecial(UnityAction<ClientSpecialMove> metodSpecial)
-    {
-        if (_onEnterClientSpecial == null)
-        {
-            _onEnterClientSpecial = new UnityEvent<ClientSpecialMove>();
-        }
-        _onEnterClientSpecial.AddListener(metodSpecial);
-    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,11 +43,11 @@ public class Waiting : MonoBehaviour
         }
         if (collision.transform.CompareTag("ClientSpecial"))
         {
-           
-            _onEnterClientSpecial.Invoke(collision.GetComponent<ClientSpecialMove>());
+            _onEnter.Invoke(collision.GetComponent<ClientMove>());
 
         }
 
     }
    
+
 }

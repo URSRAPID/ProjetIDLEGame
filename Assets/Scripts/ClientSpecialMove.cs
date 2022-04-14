@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClientSpecialMove : MonoBehaviour
+public class ClientSpecialMove : ClientMove
 {
     private List<GameObject> _waypointsListsClientSpecial;
     int current = 0;
     public float speed = 3.5f;
     float WPradius = 1;
-    public bool stop;
+   
     int randomlist;
+    public float GetSpeedClientSpecial()
+    {
+        return speed;
+    }
 
+    public void AddSpeedClientSpecial(float speedSpecial)
+    {
+        speed = speedSpecial;
+    }
 
 
     public void UpdateMoveClientSpecial()
@@ -51,4 +59,6 @@ public class ClientSpecialMove : MonoBehaviour
         UpdateMoveClientSpecial();
 
     }
+
+   
 }

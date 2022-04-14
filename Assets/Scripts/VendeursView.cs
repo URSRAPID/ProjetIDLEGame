@@ -29,5 +29,7 @@ public class VendeursView : MonoBehaviour
         _eventOnClic.Invoke();
     }
 
+   
+
 }
 
