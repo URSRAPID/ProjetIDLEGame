@@ -15,6 +15,7 @@ public class IdleModel
     private FloatObservable patisserieIncome;
     private FloatObservable money;
     private FloatObservable tips;
+    private BoolObservable isClientSpecial;
 
     public IdleModel()
     {
@@ -30,13 +31,13 @@ public class IdleModel
         patisseriePrixUp = new FloatObservable(400);
         money = new FloatObservable(0);
         tips = new FloatObservable(0);
-
+        isClientSpecial = new BoolObservable(false);
         
     }
     public void tipsValue()
     {
         Debug.Log(cafeIncome.GetValue());
-        tips.Add (cafeIncome.GetValue() /1f);
+        cafeIncome.Add(cafeIncome.GetValue() / 0.15f) ;
         AddMoney(tips.GetValue());
     }
     public void UpgradeCafe()
@@ -119,6 +120,10 @@ public class IdleModel
     }
 
 
+    internal BoolObservable GetIsClientSpecial()
+    {
+        return isClientSpecial;
+    }
 
     internal FloatObservable GetCafeIncome()
     {
@@ -165,6 +170,10 @@ public class IdleModel
         return patisserieIncome;
     }
 
+    internal FloatObservable GetTips()
+    {
+        return tips;
+    }
 
     public FloatObservable GetMoney()
     {
