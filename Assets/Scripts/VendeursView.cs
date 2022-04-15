@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class VendeursView : MonoBehaviour
 {
 
+    [SerializeField] Animator _animatorPort; 
     UnityEvent _eventOnClic;
 
     public void AddListener(UnityAction method)
@@ -27,6 +28,14 @@ public class VendeursView : MonoBehaviour
     private void OnMouseDown()
     {
         _eventOnClic.Invoke();
+    }
+
+    internal void OpenPort()
+    {
+        if (_animatorPort != null)
+        {
+            _animatorPort.SetBool("IsDoorOpen", true);
+        }
     }
 
    

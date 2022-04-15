@@ -7,7 +7,6 @@ public class ClientMoveStandard : ClientMove
 {
     
     private List<GameObject> _waypointsLists;
-    [SerializeField] Animator _animator;
     int current = 0;
     public float _speed;
     float WPradius = 1;
@@ -38,6 +37,7 @@ public class ClientMoveStandard : ClientMove
                 if (current >= _waypointsLists[randomlist].transform.childCount)
                 {
                     stop = true;
+                    
                 }
 
             }

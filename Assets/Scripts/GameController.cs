@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Waiting _milkWaitingTrigger;
     [SerializeField] Waiting _patisserieWaitingTrigger;
 
+    
 
 
     [SerializeField] private ClientSpecialMove _changerSpeedClientSpecial;
@@ -73,6 +74,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private SpawnClientSpecial _spawnClientSpecial;
 
     [SerializeField] float _speedClientStandard;
+
+    
 
     int chanceObtenirTips;
     int chanceDeVenteX2;
@@ -209,6 +212,8 @@ public class GameController : MonoBehaviour
 
     private void OnClikSpawnClient()
     {
+
+        _spawnPointClient.OpenPort();
         Vector2 whereToSpawn;
         whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
         GameObject client = Instantiate(_spawnPrefabClient, whereToSpawn, Quaternion.identity);
@@ -220,6 +225,7 @@ public class GameController : MonoBehaviour
         if (_idleModel.GetMoney().GetValue() >= _idleModel.GetPrixClientSpecial().GetValue())
         {
             _idleModel.GetIsClientSpecial().SetValue(true);
+           
             _idleModel.AddMoney(-_idleModel.GetPrixClientSpecial().GetValue());
         }
 
@@ -229,7 +235,7 @@ public class GameController : MonoBehaviour
 
     private void OnClientEnterThe(ClientMove client)
     {
-        client.stop = true;
+        client.Stop();
         clientsInthe.Add(client);
 
 
@@ -238,21 +244,21 @@ public class GameController : MonoBehaviour
 
     private void OnClientEnterJus(ClientMove client)
     {
-        client.stop = true;
+        client.Stop();
         clientsInjus.Add(client);
     }
 
 
     private void OnClientEnterMilk(ClientMove client)
     {
-        client.stop = true;
+        client.Stop();
         clientsInmilk.Add(client);
     }
 
 
     private void OnClientEnterPatisserie(ClientMove client)
     {
-        client.stop = true;
+        client.Stop();
         clientsInpatisserie.Add(client);
     }
 
@@ -260,7 +266,7 @@ public class GameController : MonoBehaviour
 
     public void OnClientEnterCafe(ClientMove client)
     {
-        client.stop = true;
+        client.Stop();
         clientsInCafe.Add(client);
     }
 
@@ -274,7 +280,7 @@ public class GameController : MonoBehaviour
             {
 
                 _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
-                clientsInCafe[0].stop = false;
+                clientsInCafe[0].Start();
                 clientsInCafe.RemoveAt(0);
 
                 if (OpenTips == true)
@@ -311,7 +317,7 @@ public class GameController : MonoBehaviour
         {
             _idleModel.AddMoney(_idleModel.GetTheIncome().GetValue());
 
-            clientsInthe[0].stop = false;
+            clientsInthe[0].Start();
             clientsInthe.RemoveAt(0);
 
             if (OpenTips == true)
@@ -341,7 +347,7 @@ public class GameController : MonoBehaviour
         {
             _idleModel.AddMoney(_idleModel.GetMilkIncome().GetValue());
 
-            clientsInmilk[0].stop = false;
+            clientsInmilk[0].Start();
             clientsInmilk.RemoveAt(0);
 
 
@@ -374,7 +380,7 @@ public class GameController : MonoBehaviour
         {
             _idleModel.AddMoney(_idleModel.GetJusIncome().GetValue());
 
-            clientsInjus[0].stop = false;
+            clientsInjus[0].Start();
             clientsInjus.RemoveAt(0);
 
 
@@ -404,7 +410,7 @@ public class GameController : MonoBehaviour
         if (clientsInpatisserie[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetPatisserieIncome().GetValue());
-            clientsInpatisserie[0].stop = false;
+            clientsInpatisserie[0].Start();
             clientsInpatisserie.RemoveAt(0);
 
 
