@@ -24,7 +24,7 @@ public class IdleModel
 
     public IdleModel()
     {
-        cafeIncome = new FloatObservable(1) ;
+        cafeIncome = new FloatObservable(1);
         theIncome = new FloatObservable(2);
         jusIncome = new FloatObservable(3);
         milkIncome = new FloatObservable(4);
