@@ -31,6 +31,11 @@ public class GameController : MonoBehaviour
 
 
     [SerializeField] private FloatView _moneyView;
+    [SerializeField] private FloatView _cafeMoneyView;
+    [SerializeField] private FloatView _theMoneyView;
+    [SerializeField] private FloatView _jusMoneyView;
+    [SerializeField] private FloatView _milkMoneyView;
+    [SerializeField] private FloatView _patisserieMoneyView;
     [SerializeField] private FloatView CafeText;
     [SerializeField] private FloatView TheText;
     [SerializeField] private FloatView JusText;
@@ -98,6 +103,11 @@ public class GameController : MonoBehaviour
 
         _idleModel = new IdleModel();
         _idleModel.GetMoney().Subscribe(_moneyView);
+        _idleModel.GetCafeIncome().Subscribe(_cafeMoneyView);
+        _idleModel.GetTheIncome().Subscribe(_theMoneyView);
+        _idleModel.GetJusIncome().Subscribe(_jusMoneyView);
+        _idleModel.GetMilkIncome().Subscribe(_milkMoneyView);
+        _idleModel.GetPatisserieIncome().Subscribe(_patisserieMoneyView);
         _idleModel.GetCafePrixUp().Subscribe(CafeText);
         _idleModel.GetThePrixUp().Subscribe(TheText);
         _idleModel.GetJusPrixUp().Subscribe(JusText);
