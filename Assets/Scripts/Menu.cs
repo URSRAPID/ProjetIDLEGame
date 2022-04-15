@@ -14,4 +14,12 @@ public class Menu : MonoBehaviour
     {
         Application.Quit();
     }
+    public void ButtonCredits()
+    {
+        SceneManager.LoadScene("SceneCredits");
+    }
+    public void ButtonMenu()
+    {
+        SceneManager.LoadScene("SceneMenu");
+    }
 }
