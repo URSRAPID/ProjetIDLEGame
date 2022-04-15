@@ -50,7 +50,7 @@ public class IdleModel
 
     public void UpgradePrixAmeliorationX3()
     {
-        prixButtonAmeliorationX3.Add(0.5f * prixButtonAmeliorationX3.GetValue());
+        prixButtonAmeliorationX3.Add(1f * prixButtonAmeliorationX3.GetValue());
     }
 
     public void UpgradePrixSpeedClient()
