@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3209289454066434288}
   - component: {fileID: 3209289454066434289}
   - component: {fileID: 3209289454066434294}
+  - component: {fileID: -5381483431145284619}
   m_Layer: 0
   m_Name: ClientSpecial
   m_TagString: ClientSpecial
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &3209289454066434289
@@ -122,5 +123,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abe5349117aa354bbdd2fe2d96d404d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
   stop: 0
+  _animator: {fileID: 0}
+  speed: 3.5
+--- !u!95 &-5381483431145284619
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209289454066434295}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6ae31e17cab353c4e85278109c967b56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
