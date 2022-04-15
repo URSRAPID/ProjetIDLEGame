@@ -213,7 +213,7 @@ public class GameController : MonoBehaviour
     private void OnClikSpawnClient()
     {
 
-        _spawnPointClient.OpenPort();
+       
         Vector2 whereToSpawn;
         whereToSpawn = new Vector2(_spawnPointClient.transform.position.x, _spawnPointClient.transform.position.y);
         GameObject client = Instantiate(_spawnPrefabClient, whereToSpawn, Quaternion.identity);
@@ -278,7 +278,7 @@ public class GameController : MonoBehaviour
         {
             if (clientsInCafe[0].stop == true)
             {
-
+                
                 _idleModel.AddMoney(_idleModel.GetCafeIncome().GetValue());
                 clientsInCafe[0].Start();
                 clientsInCafe.RemoveAt(0);
@@ -316,7 +316,7 @@ public class GameController : MonoBehaviour
         if (clientsInthe[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetTheIncome().GetValue());
-
+           
             clientsInthe[0].Start();
             clientsInthe.RemoveAt(0);
 
@@ -346,7 +346,7 @@ public class GameController : MonoBehaviour
         if (clientsInmilk[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetMilkIncome().GetValue());
-
+           
             clientsInmilk[0].Start();
             clientsInmilk.RemoveAt(0);
 
@@ -379,7 +379,7 @@ public class GameController : MonoBehaviour
         if (clientsInjus[0].stop == true)
         {
             _idleModel.AddMoney(_idleModel.GetJusIncome().GetValue());
-
+            
             clientsInjus[0].Start();
             clientsInjus.RemoveAt(0);
 
@@ -409,6 +409,7 @@ public class GameController : MonoBehaviour
     {
         if (clientsInpatisserie[0].stop == true)
         {
+            
             _idleModel.AddMoney(_idleModel.GetPatisserieIncome().GetValue());
             clientsInpatisserie[0].Start();
             clientsInpatisserie.RemoveAt(0);

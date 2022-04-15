@@ -28,15 +28,20 @@ public class VendeursView : MonoBehaviour
     private void OnMouseDown()
     {
         _eventOnClic.Invoke();
-    }
-
-    internal void OpenPort()
-    {
         if (_animatorPort != null)
         {
             _animatorPort.SetBool("IsDoorOpen", true);
         }
     }
+    private void OnMouseUp()
+    {
+        if (_animatorPort != null)
+        {
+            _animatorPort.SetBool("IsDoorOpen", false);
+        }
+     
+    }
+    
 
    
 

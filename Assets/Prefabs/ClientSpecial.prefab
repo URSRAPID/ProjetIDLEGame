@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stop: 0
-  _animator: {fileID: 0}
+  _animator: {fileID: -5381483431145284619}
   speed: 3.5
 --- !u!95 &-5381483431145284619
 Animator:

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ClientMove : MonoBehaviour
 {
@@ -17,9 +16,7 @@ public class ClientMove : MonoBehaviour
     internal void Start()
     {
         stop = false;
-        if (_animator != null)
-        {
-            _animator.SetBool("Idle_Dos", false);
-        }
+
+        _animator.SetBool("Idle_Dos", false);
     }
 }
