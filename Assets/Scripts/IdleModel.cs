@@ -55,6 +55,7 @@ public class IdleModel
 
     public void UpgradePrixSpeedClient()
     {
+        AddMoney(-GetSpeedPrixUpClients().GetValue());
         speedPrixUpClients.Add(0.2f * speedPrixUpClients.GetValue());
     }
 
